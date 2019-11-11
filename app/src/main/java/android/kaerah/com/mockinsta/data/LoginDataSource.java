@@ -1,6 +1,11 @@
 package android.kaerah.com.mockinsta.data;
 
 import android.kaerah.com.mockinsta.data.model.LoggedInUser;
+import android.util.Log;
+
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
 
 import java.io.IOException;
 
@@ -9,10 +14,22 @@ import java.io.IOException;
  */
 public class LoginDataSource {
 
+    private static final String TAG = "Login";
+
     public Result<LoggedInUser> login(String username, String password) {
 
         try {
             // TODO: handle loggedInUser authentication
+            ParseUser.logInInBackground(username, password, new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (e!= null) {
+                        Log.e(TAG, "Issure with login", e);
+                        e.printStackTrace();
+                        return;
+                    }
+                }
+            });
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(),

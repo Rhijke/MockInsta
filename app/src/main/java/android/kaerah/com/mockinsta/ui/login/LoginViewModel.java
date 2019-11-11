@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import android.content.Intent;
+import android.kaerah.com.mockinsta.MainActivity;
 import android.util.Patterns;
 
 import android.kaerah.com.mockinsta.data.LoginRepository;
@@ -29,17 +31,17 @@ public class LoginViewModel extends ViewModel {
         return loginResult;
     }
 
-    public void login(String username, String password) {
+    public Integer login(String username, String password) {
         // can be launched in a separate asynchronous job
         Result<LoggedInUser> result = loginRepository.login(username, password);
 
         if (result instanceof Result.Success) {
-            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
-            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+            return 200;
         } else {
-            loginResult.setValue(new LoginResult(R.string.login_failed));
+            return 400;
         }
     }
+
 
     public void loginDataChanged(String username, String password) {
         if (!isUserNameValid(username)) {
@@ -65,6 +67,6 @@ public class LoginViewModel extends ViewModel {
 
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
-        return password != null && password.trim().length() > 5;
+        return password != null && password.trim().length() > 3;
     }
 }

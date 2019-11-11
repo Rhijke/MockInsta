@@ -5,6 +5,8 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
+import android.kaerah.com.mockinsta.MainActivity;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -28,6 +31,7 @@ import android.kaerah.com.mockinsta.ui.login.LoginViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String TAG = "Login";
     private LoginViewModel loginViewModel;
 
     @Override
@@ -113,10 +117,19 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
+                Integer result = loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+                Log.i(TAG, result.toString());
+                if (result == 200) {
+                    goToMainActivity();
+                }
             }
         });
+    }
+
+    private void goToMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
