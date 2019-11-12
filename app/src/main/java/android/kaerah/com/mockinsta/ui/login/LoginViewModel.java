@@ -16,7 +16,6 @@ import android.kaerah.com.mockinsta.R;
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
-    private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
     private LoginRepository loginRepository;
 
     LoginViewModel(LoginRepository loginRepository) {
@@ -25,10 +24,6 @@ public class LoginViewModel extends ViewModel {
 
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
-    }
-
-    LiveData<LoginResult> getLoginResult() {
-        return loginResult;
     }
 
     public Integer login(String username, String password) {

@@ -6,6 +6,7 @@ import android.util.Log;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import java.io.IOException;
 
@@ -17,9 +18,7 @@ public class LoginDataSource {
     private static final String TAG = "Login";
 
     public Result<LoggedInUser> login(String username, String password) {
-
         try {
-            // TODO: handle loggedInUser authentication
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 @Override
                 public void done(ParseUser user, ParseException e) {
@@ -33,7 +32,7 @@ public class LoginDataSource {
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(),
-                            "Jane Doe");
+                            username);
             return new Result.Success<>(fakeUser);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
