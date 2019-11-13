@@ -77,6 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        finish();
     }
 
     private boolean isFormDataValid() {

@@ -31,6 +31,9 @@ import android.kaerah.com.mockinsta.R;
 import android.kaerah.com.mockinsta.ui.login.LoginViewModel;
 import android.kaerah.com.mockinsta.ui.login.LoginViewModelFactory;
 
+import com.parse.Parse;
+import com.parse.ParseUser;
+
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "Login";
@@ -40,6 +43,14 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Check if a user is already logged in
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            goToMainActivity();
+        }
+
+
         loginViewModel = ViewModelProviders.of(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -130,6 +141,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goToMainActivity() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        finish();
     }
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
