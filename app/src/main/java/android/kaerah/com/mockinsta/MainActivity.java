@@ -10,12 +10,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.kaerah.com.mockinsta.data.model.BitmapScaler;
 import android.kaerah.com.mockinsta.data.model.Post;
+import android.kaerah.com.mockinsta.ui.login.LoginActivity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         //queryPosts();
+    }
+    // Handle menu items on clicks
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_logout:
+                logout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void logout() {
+        ParseUser.logOut();
+        Intent i = new Intent(this, LoginActivity.class);
+        startActivity(i);
+        finish();
     }
 
     // Returns the File for a photo stored on disk given the fileName
