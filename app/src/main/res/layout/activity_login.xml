@@ -14,7 +14,6 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="24dp"
-
         android:hint="@string/prompt_username"
         android:inputType="text"
         android:selectAllOnFocus="true"
@@ -40,32 +39,36 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="64dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="#00c853"
         android:enabled="false"
         android:text="@string/action_sign_in"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/register"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
-        android:background="#00c853"
         app:layout_constraintVertical_bias="0.2" />
 
     <Button
         android:id="@+id/register"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:layout_gravity="start"
-        android:layout_marginEnd="48dp"
         android:enabled="false"
         android:text="@string/action_register"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/login"
         app:layout_constraintVertical_bias="0.0"
         android:background="#00b8d4"/>
 
