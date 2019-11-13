@@ -2,6 +2,7 @@ package android.kaerah.com.mockinsta;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,20 +39,39 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
+    private Toolbar mTopToolbar;
 
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
+
+
+    // Inflate menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        Log.i(TAG, "Inflate menu");
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTopToolbar = findViewById(R.id.toolbar);
         etDescription = findViewById(R.id.etDescription);
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         btnSubmit = findViewById(R.id.btnSubmit);
         ivPostImage = findViewById(R.id.ivCaptureImage);
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.mToolbar);
+        myToolbar.setLogo(R.drawable.nav_logo_whiteout);
+        setSupportActionBar(myToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 photoFile = getPhotoFileUri(photoFileName);
-                if (photoFile != null) {
+                // Check that a photo has been taken
+                if (photoFile != null || ivPostImage.getDrawable() == null) {
                     btnSubmit.setEnabled(true);
                 }
                 Uri fileProvider = FileProvider.getUriForFile(MainActivity.this, "com.kaerah.mockinsta", photoFile);
@@ -80,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         });
         //queryPosts();
     }
+
     // Returns the File for a photo stored on disk given the fileName
     public File getPhotoFileUri(String fileName) {
         // Get safe storage directory for photos

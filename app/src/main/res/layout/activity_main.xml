@@ -5,13 +5,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="10dp"
     android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ActionBar"
+        android:id="@+id/mToolbar"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/etDescription"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mToolbar"
         android:inputType="text"
         android:hint="@string/etphoto_description"/>
 
