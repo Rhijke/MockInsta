@@ -239,14 +239,8 @@
     <color name="reg_token_text">#ffa4a8ab</color>
     <color name="result_bar_active_color">#ff4999da</color>
     <color name="share_screen_icon_color">#ff4a5158</color>
-    <color name="slider_gradient_background">@color/grey_2</color>
-    <color name="slider_gradient_end">#fff50000</color>
-    <color name="slider_gradient_start">#ffb900b4</color>
-    <color name="slider_sticker_background">@color/white</color>
-    <color name="slider_sticker_question_hint">@color/grey_3</color>
-    <color name="slider_sticker_question_text">@color/black</color>
     <color name="solid_white">#ffffffff</color>
-    <color name="status_bar_background">#ffb2b2b2</color>
+    <color name="status_bar_background">@color/solid_white</color>
     <color name="status_bar_background_light_semitransparent">@color/black_6_transparent</color>
     <color name="sticker_subtle_dark_background">#99b4b4b4</color>
     <color name="sticker_subtle_light_background">#99d9d9d9</color>
@@ -256,7 +250,7 @@
     <color name="title_color">#ff999999</color>
     <color name="title_text">#ff262626</color>
     <color name="transparent">#00000000</color>
-    <color name="tray_avatar_white_border_color">@color/white</color>
+    <color name="tray_avatar_white_border_color">@color/black</color>
     <color name="tray_item_border_color">@color/black</color>
     <color name="white">#ffffffff</color>
     <color name="white_10_transparent">#1affffff</color>
@@ -282,10 +276,4 @@
     <color name="yellow_7">#ffb07d0f</color>
     <color name="yellow_8">#ff795500</color>
     <color name="yellow_9">#ff563c00</color>
-    <color name="zero_rating_data_banner_color">#ff262626</color>
-    <color name="zero_rating_video_settings_drawer_cancel_button_color">#ff272727</color>
-    <color name="zero_rating_video_settings_drawer_confirm_background_color">#ff3897f0</color>
-    <color name="zero_rating_video_settings_drawer_confirm_button_color">#ffffffff</color>
-    <color name="zero_rating_video_settings_drawer_subtitle_color">#ff999999</color>
-    <color name="zero_rating_video_settings_drawer_unchecked_border_color">#ffdbdbdb</color>
 </resources>

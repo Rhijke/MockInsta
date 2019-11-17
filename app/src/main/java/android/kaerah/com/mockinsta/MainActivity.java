@@ -1,5 +1,6 @@
 package android.kaerah.com.mockinsta;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -41,18 +43,17 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCaptureImage;
     private ImageView ivPostImage;
     private Button btnSubmit;
-    private Toolbar mTopToolbar;
+    private BottomNavigationView bottomNavigationView;
+
 
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo.jpg";
     File photoFile;
 
-
     // Inflate menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        Log.i(TAG, "Inflate menu");
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
@@ -62,18 +63,40 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTopToolbar = findViewById(R.id.toolbar);
         etDescription = findViewById(R.id.etDescription);
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         btnSubmit = findViewById(R.id.btnSubmit);
         ivPostImage = findViewById(R.id.ivCaptureImage);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mToolbar);
-        myToolbar.setLogo(R.drawable.nav_logo_whiteout);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
+       // Set on click listeners
+        setOnClickBtnSubmit();
+        setOnClickBtnCaptureImage();
+            // Navigation menu
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()) {
+                    case R.id.action_compose:
+                        return true;
+                    case R.id.action_home:
+                        return true;
+                    case R.id.action_profile:
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        //queryPosts();
+    }
+
+    private void setOnClickBtnSubmit() {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +105,9 @@ public class MainActivity extends AppCompatActivity {
                 savePost(description, user, photoFile);
             }
         });
+    }
 
+    private void setOnClickBtnCaptureImage() {
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        //queryPosts();
     }
     // Handle menu items on clicks
     @Override
