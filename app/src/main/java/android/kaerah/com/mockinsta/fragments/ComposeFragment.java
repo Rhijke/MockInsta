@@ -42,7 +42,7 @@ public class ComposeFragment extends Fragment {
         public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
         public String photoFileName = "photo.jpg";
         File photoFile;
-        Context context = getContext();
+        Context context ;
         // The onCreateView method is called when Fragment should create its View object hierarchy,
         // either dynamically or via XML layout inflation.
         @Override
@@ -61,6 +61,7 @@ public class ComposeFragment extends Fragment {
                 btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
                 btnSubmit = view.findViewById(R.id.btnSubmit);
                 ivPostImage = view.findViewById(R.id.ivCaptureImage);
+                context = getContext();
                 // Set on click listeners
                 setOnClickBtnSubmit();
                 setOnClickBtnCaptureImage();

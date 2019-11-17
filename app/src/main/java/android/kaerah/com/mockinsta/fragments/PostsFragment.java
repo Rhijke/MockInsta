@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -26,6 +27,7 @@ public class PostsFragment extends Fragment {
     private Context context;
     protected PostsAdapter adapter;
     protected List<Post> posts;
+    private SwipeRefreshLayout swipeContainer;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
@@ -43,6 +45,24 @@ public class PostsFragment extends Fragment {
         RecyclerView rvPosts = view.findViewById(R.id.rvPosts);
         context = getContext();
         posts = new ArrayList<>();
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                queryPosts();
+                swipeContainer.setRefreshing(false);
+
+            }
+
+        });
+
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         adapter = new PostsAdapter(context, posts);
         rvPosts.setAdapter(adapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(context));
@@ -50,7 +70,6 @@ public class PostsFragment extends Fragment {
         queryPosts();
 
     }
-
     // Get users posts from Parse
     protected void queryPosts() {
         final ParseQuery<Post> postParseQuery = new ParseQuery<Post>(Post.class);
