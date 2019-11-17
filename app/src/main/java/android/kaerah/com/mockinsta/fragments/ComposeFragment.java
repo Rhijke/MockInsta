@@ -56,6 +56,7 @@ public class ComposeFragment extends Fragment {
         // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
+                Log.i(TAG, "Compose frag created");
                 etDescription = view.findViewById(R.id.etDescription);
                 btnCaptureImage = view.findViewById(R.id.btnCaptureImage);
                 btnSubmit = view.findViewById(R.id.btnSubmit);

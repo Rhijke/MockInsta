@@ -2,6 +2,7 @@ package android.kaerah.com.mockinsta;
 
 import android.content.Intent;
 import android.kaerah.com.mockinsta.fragments.ComposeFragment;
+import android.kaerah.com.mockinsta.fragments.ProfileFragment;
 import android.kaerah.com.mockinsta.ui.login.LoginActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,7 +11,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
@@ -31,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        final FragmentManager ft = getSupportFragmentManager();
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.mToolbar);
         setSupportActionBar(myToolbar);
@@ -40,26 +42,30 @@ public class MainActivity extends AppCompatActivity {
 
 
             // Navigation menu
-
+//        bottomNavigationView.setSelectedItemId(R.id.action_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 // Begin the transaction
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Fragment fragment = null;
                 switch(menuItem.getItemId()) {
-                    case R.id.action_compose:
-                        ft.replace(R.id.frameManager, new ComposeFragment());
-                        ft.commit();
-                        return true;
-                    case R.id.action_home:
-                        return true;
                     case R.id.action_profile:
-                        return true;
+                        fragment = new ProfileFragment();
+                        break;
+                    case R.id.action_compose:
+                        fragment = new ComposeFragment();
+                        break;
+                    case R.id.action_home:
+                        fragment = new ComposeFragment();
+                        break;
                     default:
-                        return false;
+                        throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
                 }
+                ft.beginTransaction().replace(R.id.frameManager, fragment).commit();
+                return true;
             }
         });
+
         //queryPosts();
     }
 
