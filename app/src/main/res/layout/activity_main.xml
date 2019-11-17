@@ -30,36 +30,11 @@
         app:menu="@menu/menu_bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <EditText
+    <FrameLayout
+        android:id="@+id/frameManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etDescription"
-        app:layout_constraintTop_toBottomOf="@+id/mToolbar"
-        android:inputType="text"
-        android:hint="@string/etphoto_description"/>
+        android:layout_height="match_parent">
+    </FrameLayout>
 
-    <Button
-        android:id="@+id/btnCaptureImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Take photo"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
-    <ImageView
-        android:id="@+id/ivCaptureImage"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnCaptureImage" />
-
-    <Button
-        android:id="@+id/btnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Post"
-        android:enabled="false"
-        app:layout_constraintTop_toBottomOf="@+id/ivCaptureImage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

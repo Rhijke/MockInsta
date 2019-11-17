@@ -1,16 +1,11 @@
 package android.kaerah.com.mockinsta;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.FileProvider;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.kaerah.com.mockinsta.data.model.BitmapScaler;
 import android.kaerah.com.mockinsta.data.model.Post;
+import android.kaerah.com.mockinsta.fragments.ComposeFragment;
 import android.kaerah.com.mockinsta.ui.login.LoginActivity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,6 +19,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.FindCallback;
@@ -75,14 +77,19 @@ public class MainActivity extends AppCompatActivity {
 
 
        // Set on click listeners
-        setOnClickBtnSubmit();
-        setOnClickBtnCaptureImage();
+//        setOnClickBtnSubmit();
+//        setOnClickBtnCaptureImage();
             // Navigation menu
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                // Begin the transaction
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 switch(menuItem.getItemId()) {
                     case R.id.action_compose:
+                        ft.replace(R.id.frameManager, new ComposeFragment());
+                        ft.commit();
                         return true;
                     case R.id.action_home:
                         return true;
