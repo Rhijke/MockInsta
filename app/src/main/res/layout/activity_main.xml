@@ -33,8 +33,10 @@
     <FrameLayout
         android:id="@+id/frameManager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </FrameLayout>
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="10dp"></FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

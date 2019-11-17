@@ -2,6 +2,7 @@ package android.kaerah.com.mockinsta;
 
 import android.content.Intent;
 import android.kaerah.com.mockinsta.fragments.ComposeFragment;
+import android.kaerah.com.mockinsta.fragments.PostsFragment;
 import android.kaerah.com.mockinsta.fragments.ProfileFragment;
 import android.kaerah.com.mockinsta.ui.login.LoginActivity;
 import android.os.Bundle;
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             // Navigation menu
-//        bottomNavigationView.setSelectedItemId(R.id.action_home);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new ComposeFragment();
                         break;
                     case R.id.action_home:
-                        fragment = new ComposeFragment();
+                        fragment = new PostsFragment();
                         break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + menuItem.getItemId());
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
         //queryPosts();
     }
 
@@ -88,25 +88,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
-
-
-//    private void queryPosts() {
-//        final ParseQuery<Post> postParseQuery = new ParseQuery<Post>(Post.class);
-//        postParseQuery.include(Post.KEY_USER);
-//        postParseQuery.findInBackground(new FindCallback<Post>() {
-//            @Override
-//            public void done(List<Post> posts, ParseException e) {
-//                if (e != null) {
-//                    Log.e(TAG, e.toString());
-//                    e.printStackTrace();
-//                    return;
-//                }
-//                for (Post post: posts) {
-//                    Log.i(TAG, "Post: " + post.getDescription());
-//                    etDescription.setText(post.getDescription());
-//                }
-//
-//            }
-//        });
-//    }
 }

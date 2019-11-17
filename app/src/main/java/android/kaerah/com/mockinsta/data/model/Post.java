@@ -1,23 +1,14 @@
 package android.kaerah.com.mockinsta.data.model;
 
-import android.media.Image;
-import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.parse.Parse;
 import com.parse.ParseClassName;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import java.util.Objects;
-
 @ParseClassName("Post")
 public class Post extends ParseObject {
-    public static final String KEY_DESCRIPTION = "description";
-    public static final String KEY_IMAGE = "image";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_IMAGE = "image";
     public static final String KEY_USER = "user";
     // Get Methods
     public String getDescription() {
@@ -29,7 +20,7 @@ public class Post extends ParseObject {
     }
 
     public ParseUser getUser() {
-        return getParseUser(Objects.requireNonNull(getString(KEY_USER)));
+        return (ParseUser) getParseObject("user");
     }
     // SET methods
     public void setDescription(String description) {
