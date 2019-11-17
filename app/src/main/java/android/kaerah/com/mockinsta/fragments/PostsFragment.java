@@ -51,6 +51,7 @@ public class PostsFragment extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                adapter.clear();
                 queryPosts();
                 swipeContainer.setRefreshing(false);
 
