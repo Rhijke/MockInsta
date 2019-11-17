@@ -87,7 +87,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
                                 return false;
                             }
                         })
-                        .override(200,200)
+                        .fitCenter()
                         .into(ivImage);
             } else {
                 Log.i("Posts", "Image is null.");

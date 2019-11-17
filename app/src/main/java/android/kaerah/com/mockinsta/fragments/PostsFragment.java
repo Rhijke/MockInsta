@@ -24,8 +24,8 @@ import java.util.List;
 public class PostsFragment extends Fragment {
     private final String TAG = "PostsFragment";
     private Context context;
-    private PostsAdapter adapter;
-    private List<Post> posts;
+    protected PostsAdapter adapter;
+    protected List<Post> posts;
 
     // The onCreateView method is called when Fragment should create its View object hierarchy,
     // either dynamically or via XML layout inflation.
@@ -52,7 +52,7 @@ public class PostsFragment extends Fragment {
     }
 
     // Get users posts from Parse
-    private void queryPosts() {
+    protected void queryPosts() {
         final ParseQuery<Post> postParseQuery = new ParseQuery<Post>(Post.class);
         postParseQuery.include(Post.KEY_USER);
         postParseQuery.setLimit(20);
